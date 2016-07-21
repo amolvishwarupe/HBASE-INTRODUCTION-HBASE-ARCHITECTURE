@@ -46,15 +46,28 @@ It is very common to use both on the same Hadoop cluster.   Some typical use cas
 
 5. What are the different modes in which Hbase can be run?
 
-
+standalone and distributed
 
 6. Why is zookeeper needed in Hbase?
 
-
+A distributed HBase relies completely on Zookeeper (for cluster configuration and management). In Apache HBase, ZooKeeper coordinates, communicates, and shares state between the Masters and RegionServers. HBase has a design policy of using ZooKeeper only for transient data (that is, for coordination and state communication). Thus if the HBase’s ZooKeeper data is removed,
+ only the transient operations are affected — data can continue to be written and read to/from HBase.
+ 
+ 
 8 Hbase is a schema less database, what does it mean?
+
+it schema can be defined dynamically and no need to define like sql
  
 9 What is the minimum number of column family every Hbase table should have?
  
-
+0
 
 10 What is the benefit of using connection pool in Hbase?
+
+"You don't have to use only one Connection per application, and in some certain cases you may discover a need for more than one.
+
+In general, the important thing to know is that Connections are "heavy" objects that are expensive to create, but thread-safe. Table, Admin, and BufferedMutatator objects are lightweight and not necessarily thread-safe. Connection objects don't necessarily translate to a single "connection", and can multiplex behind the scenes. Better to think of it as a factory.
+
+I would suggest you create a single Connection where possible, and carefully test increasing a pool if you think more factories will improve performance. There are certainly no rules against having more Connection objects. It's just a matter of potentially unnecessary overhead. Hope this helps."
+
+
