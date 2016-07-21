@@ -1,0 +1,3 @@
+# HBASE-INTRODUCTION-HBASE-ARCHITECTURE
+
+Hbase assignments 
