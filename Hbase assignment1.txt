@@ -1,0 +1,60 @@
+Give a brief elaboration of the below questions.
+
+1. Give a brief difference between HBASE and HDFS.
+
+If your application has a variable schema where each row is slightly different
+If you find that your data is stored in collections, that is all keyed on the same value
+If you need random, real time read/write access to your Big Data.
+If you need key based access to data when storing or retrieving.
+If you have huge amount of data with existing Hadoop cluster
+But HBase has some limitations
+
+It can't be used for classic transactional applications or even relational analytics.
+It is also not a complete substitute for HDFS when doing large batch MapReduce.
+It doesn’t talk SQL, have an optimizer, support cross record transactions or joins.
+It can't be used with complicated access patterns (such as joins)
+
+2. List the main components of HBASE.
+
+HBase Architecture
+
+In HBase, there are three main components: Master, Region server and Zoo keeper. The other components are Memstore, HFile and WAL.
+
+As HBase runs on top of HDFS, it utilizes the Master-Slave architecture in which the HMaster will be the master node and the Region Servers are the slave nodes. When the client sends a write request, HMaster gets that request and forward it to the respective Region Server.
+Region Server:
+
+It is a system which acts similar to a data node. When Region Server (RS) receives write request, 
+it directs the request to specific Region. Each Region stores set of rows. Rows data can be 
+separated in multiple column families (CFs). Data of particular CF is stored in HStore which consists of Memstore and a set of HFiles.
+
+Memstore keeps track of all the logs for the read and write operations that has been performed within that 
+particular region server. From this we can say that is acting similar to a name node in Hadoop. 
+Memstore is an in-memory storage, hence the Memstore utilizes the in-memory storage of each data 
+node to store the logs. When certain thresholds are met, Memstore data gets flushed into HFile.
+
+3. Does Hbase support sql?
+ No but using some tools we can use make it support sql
+ 
+ 
+4. When should we use HBASE, list some of the scenarios for the same.
+HBase is a BigTable-type schemaless ordered hash table that stores it's data on HDFS.   It is designed for random access, single-row lookups and updates, and scans of contiguous key ranges.
+
+Hive is a query engine that allows you to impose a logical relational schema on top of a wide variety of physical storage mechanisms and file formats, both internal and external to the Hadoop cluster, and to run SQL-ish queries against those schemas as MapReduce jobs.   It also gives you the ability to manage exactly how a logical table is stored and structured as physical files on HDFS.   It is is designed for large analytics queries and batch transformations; it has limited write capabilities.
+
+It is very common to use both on the same Hadoop cluster.   Some typical use cases that involve both would be using Hive as an ETL tool to do batch inserts into HBase, or to run queries which join data in HBase tables with data in files residing in HDFS and in external data stores.
+
+
+5. What are the different modes in which Hbase can be run?
+
+
+
+6. Why is zookeeper needed in Hbase?
+
+
+8 Hbase is a schema less database, what does it mean?
+ 
+9 What is the minimum number of column family every Hbase table should have?
+ 
+
+
+10 What is the benefit of using connection pool in Hbase?
